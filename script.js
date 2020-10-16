@@ -1,20 +1,37 @@
 const hero = document.querySelector('.jumbotron');
+const fadeItems = document.querySelectorAll('.item-fade');
 
 function heroScroll() {
-    //TOP
-    if(hero.getBoundingClientRect().top <= 1){
-      hero.style.transform = `scale(0.2)`;
-      hero.style.transform = `translate(-100 %, -100 %)`;
-    }
-    //BOTTOM
-    if(hero.getBoundingClientRect().bottom <= 0){
-      hero.style.transform = `scale(0)`;
-      hero.style.transform = `translate(0,0)`;
-    }
+    const heroPosition = hero.getBoundingClientRect().bottom;
+    const screenPosition = window.innerHeight / 4;
 
+    if (heroPosition < screenPosition) {
+        hero.classList.add('hero-fade-bottom');
+    } else {
+        hero.classList.remove('hero-fade-bottom');
+    }
 }
 
-hero.addEventListener('wheel', heroScroll)
+window.addEventListener('wheel', heroScroll);
 
+//
+fadeItems.forEach((item) =>
+    item.addEventListener('wheel', (e) => {
+        const itemPosition = item.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight / 1;
 
+        if (itemPosition < screenPosition) {
+            item.classList.add('item-fade-bottom');
+        } else {
+            item.classList.remove('item-fade-bottom');
+        }
 
+        console.log(itemPosition);
+    })
+);
+
+// filterInputs.forEach((input) =>
+//     input.addEventListener('input', () => {
+//         transformText(textarea.value);
+//     })
+// );
