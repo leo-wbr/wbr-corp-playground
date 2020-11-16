@@ -5,9 +5,9 @@ function heroScroll() {
     const heroHeight = hero.offsetHeight;
 
     if (currentScroll >= heroHeight / 1.2) {
-        hero.classList.add('hero-fade-bottom');
+        hero.classList.add('jumbotron-fade-bottom');
     } else {
-        hero.classList.remove('hero-fade-bottom');
+        hero.classList.remove('jumbotron-fade-bottom');
     }
 }
 
