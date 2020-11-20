@@ -18,9 +18,8 @@ window.addEventListener('wheel', heroScroll);
 const galleryRows = document.querySelectorAll(`[class*="gallery-row-"]`);
 
 function galleryScroll() {
+    const scrollRow = window.pageYOffset;
     galleryRows.forEach((row, index) => {
-        const scrollRow = window.pageYOffset;
-
         if (index % 2 === 0) {
             row.style.transform = `matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, ${scrollRow / 13}, 0, 0, 1)`;
         } else {
