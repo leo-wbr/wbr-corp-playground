@@ -1,3 +1,4 @@
+// Hero Script
 const hero = document.querySelector('.jumbotron');
 
 function heroScroll() {
@@ -12,3 +13,19 @@ function heroScroll() {
 }
 
 window.addEventListener('wheel', heroScroll);
+
+// Scrolling Gallery
+const galleryRows = document.querySelectorAll(`[class*="gallery-row-"]`);
+function galleryScroll() {
+    galleryRows.forEach((row, index) => {
+        const scrollOddRow = window.pageYOffset / 15;
+        const scrollEvenRow = window.pageYOffset / 25;
+
+        if (index % 2 === 0) {
+            row.style.transform = `matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, ${scrollOddRow}, 0, 0, 1)`;
+        } else {
+            row.style.transform = `matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -${scrollEvenRow}, 0, 0, 1)`;
+        }
+    });
+}
+window.addEventListener('wheel', galleryScroll);
