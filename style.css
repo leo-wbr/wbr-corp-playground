@@ -116,10 +116,6 @@ html {
 	width: 130%;
 }
 
-[class*='gallery-row']:nth-child(even) {
-	transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-}
-
 [class*='gallery-row'] {
 	grid-template-columns: repeat(6, 1fr);
 }

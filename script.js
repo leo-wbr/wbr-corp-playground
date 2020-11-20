@@ -16,15 +16,15 @@ window.addEventListener('wheel', heroScroll);
 
 // Scrolling Gallery
 const galleryRows = document.querySelectorAll(`[class*="gallery-row-"]`);
+
 function galleryScroll() {
     galleryRows.forEach((row, index) => {
-        const scrollOddRow = window.pageYOffset / 13;
-        const scrollEvenRow = window.pageYOffset / 8;
+        const scrollRow = window.pageYOffset;
 
         if (index % 2 === 0) {
-            row.style.transform = `matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, ${scrollOddRow}, 0, 0, 1)`;
+            row.style.transform = `matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, ${scrollRow / 13}, 0, 0, 1)`;
         } else {
-            row.style.transform = `matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -${scrollEvenRow}, 0, 0, 1)`;
+            row.style.transform = `matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -${scrollRow / 8}, 0, 0, 1)`;
         }
     });
 }
