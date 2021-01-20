@@ -10,7 +10,12 @@ html {
 	box-sizing: inherit;
 }
 
-/* HERO STYLING */
+/********************************************************
+*********************************************************
+HERO STYLING
+*********************************************************
+*********************************************************/
+
 .jumbotron {
 	background: url('https://source.unsplash.com/1400x750') center center fixed
 		no-repeat;
@@ -32,7 +37,7 @@ html {
 	z-index: 999;
 }
 
-/* HERO TRANSITIONS ON SCROLL DOWN AND TRANSFORMING AND SCALE */
+/** HERO TRANSITIONS ON SCROLL DOWN AND TRANSFORMING AND SCALE **/
 .jumbotron {
 	transition: all 0.8s;
 	transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -43,57 +48,12 @@ html {
 	opacity: 0.1;
 }
 
-/* WEBINAR SECTION MOBILE FIRST */
-.webinars {
-	background-color: lightcyan;
-	overflow: hidden;
-}
+/********************************************************
+*********************************************************
+GRID ROW GALLERY SCROLL
+*********************************************************
+*********************************************************/
 
-.webinar-images {
-	display: none;
-}
-
-.webinar-content {
-	display: flex;
-	flex-flow: column nowrap;
-	justify-content: center;
-}
-
-@media (min-width: 600px) {
-	.webinars,
-	.webinar-images {
-		display: grid;
-	}
-	.webinars {
-		gap: 1%;
-		grid-template-columns: 65% 45%;
-	}
-
-	.webinar-images {
-		gap: 4%;
-		grid-template-columns: repeat(2, 1fr);
-	}
-
-	/* WEBINAR IMAGES STYLING */
-	[class*='cover-'] img {
-		padding: 3%;
-		border-radius: 5%;
-		background-color: rgba(238, 238, 238, 0.445);
-		box-shadow: 0 50px 100px -20px rgba(50, 50, 93, 0.25),
-			0 30px 60px -30px rgba(0, 0, 0, 0.3),
-			inset 0 -2px 6px 0 rgba(10, 37, 64, 0.35);
-		transform: rotate(-6deg);
-		transform-origin: 100% 0;
-	}
-}
-
-@media (min-width: 900px) {
-	.webinars {
-		grid-template-columns: 50% 50%;
-	}
-}
-
-/* GRID GALLERY  */
 .gallery {
 	background-color: black;
 	position: relative;
@@ -135,7 +95,7 @@ html {
 	box-shadow: inset 10000px 0 0 rgba(0, 0, 0, 0.55);
 }
 
-/* HEADER STYLINGS */
+/** GRID ROW GALLERY SCROLL CONTENT STYLINGS **/
 .grid-header {
 	color: white;
 }
@@ -158,5 +118,145 @@ html {
 	[class*='gallery-row'] {
 		gap: 1.05rem;
 		width: 120%;
+	}
+}
+
+/********************************************************
+*********************************************************
+CAROUSEL GALLERY
+*********************************************************
+*********************************************************/
+
+/** FLEX / POSITIONING ON MOBILE **/
+.carousel {
+	display: flex;
+	flex-flow: column wrap;
+	align-items: center;
+}
+
+.carousel-arrs [class*='arr-'] {
+	position: absolute;
+	top: 40%;
+}
+
+.carousel-arrs [class*='arr-'] svg {
+	box-shadow: 5px 3px 10px rgba(0, 0, 0, 0.199);
+}
+
+.carousel-arrs .arr-left {
+	left: -2%;
+}
+
+.carousel-arrs .arr-right {
+	right: -2%;
+}
+
+.carousel-image img {
+	width: 100vw;
+	height: 310px;
+	object-fit: cover;
+	border-radius: 0.25rem 0.25rem 0% 0%; /* Rem Values Taken from BS4 .rounded Class applied to .carousel div on html*/
+}
+
+/** MOBILE COLOR / TYPOGRAPHY STYLING **/
+.carousel {
+	background-color: rgb(255, 255, 255);
+	box-shadow: 0 50px 100px -20px rgba(50, 50, 93, 0.25),
+		0 30px 60px -30px rgba(0, 0, 0, 0.3),
+		inset 0 -2px 6px 0 rgba(10, 37, 64, 0.35);
+}
+
+.carousel-content {
+	padding: 80px 40px;
+}
+
+/** STYLE OVERRIDES FOR 768PX AND ABOVE  **/
+@media (min-width: 768px) {
+	.carousel {
+		flex-flow: row nowrap;
+	}
+
+	.carousel-arrs [class*='arr-'] {
+		top: 50%;
+		z-index: 999999;
+	}
+
+	.carousel-arrs .arr-left {
+		left: -1%;
+	}
+	.carousel-arrs .arr-right {
+		right: -1%;
+	}
+
+	.carousel-image {
+		background-color: #00afef44;
+		-webkit-clip-path: polygon(0 0, 100% 0%, 78% 100%, 0% 100%);
+		clip-path: polygon(0 0, 100% 0%, 78% 100%, 0% 100%);
+	}
+	.carousel-image img {
+		min-height: 500px;
+		border-radius: 0.25rem 0% 0% 0.25rem; /* Rem Values Taken from BS4 .rounded Class applied to .carousel div on html*/
+		-webkit-clip-path: polygon(0 0, 100% 0%, 75% 100%, 0% 100%);
+		clip-path: polygon(0 0, 100% 0%, 75% 100%, 0% 100%);
+	}
+
+	.carousel .carousel-image,
+	.carousel .carousel-content {
+		flex-basis: 50%;
+	}
+}
+
+/********************************************************
+*********************************************************
+WEBINAR SECTION MOBILE FIRST
+*********************************************************
+*********************************************************/
+
+.webinars {
+	background-color: lightcyan;
+	overflow: hidden;
+}
+
+.webinar-images {
+	display: none;
+}
+
+.webinar-content {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+}
+
+@media (min-width: 600px) {
+	.webinars,
+	.webinar-images {
+		display: grid;
+	}
+	.webinars {
+		gap: 1%;
+		grid-template-columns: 65% 45%;
+	}
+
+	.webinar-images {
+		gap: 4%;
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	/** WEBINAR IMAGES STYLING **/
+	[class*='cover-'] img {
+		padding: 3%;
+		border-radius: 5%;
+		background-color: rgba(238, 238, 238, 0.445);
+		box-shadow: 0 50px 100px -20px rgba(50, 50, 93, 0.25),
+			0 30px 60px -30px rgba(0, 0, 0, 0.3),
+			inset 0 -2px 6px 0 rgba(10, 37, 64, 0.35);
+		transform: rotate(-6deg);
+		transform-origin: 100% 0;
+	}
+}
+
+@media (min-width: 900px) {
+	.webinars {
+		grid-template-columns: 50% 50%;
 	}
 }
