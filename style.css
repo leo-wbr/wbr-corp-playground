@@ -137,28 +137,38 @@ CAROUSEL GALLERY
 .carousel-arrs [class*='arr-'] {
 	position: absolute;
 	top: 40%;
+	background: none;
+  border: none;
+  z-index:9999;
 }
 
-.carousel-arrs [class*='arr-'] svg {
-	box-shadow: 5px 3px 10px rgba(0, 0, 0, 0.199);
-}
-
-.carousel-arrs .arr-left {
+.carousel-arrs .arr-prev {
 	left: -2%;
 }
 
-.carousel-arrs .arr-right {
+.carousel-arrs .arr-next {
 	right: -2%;
 }
 
-.carousel-image img {
-	width: 100vw;
-	height: 310px;
-	object-fit: cover;
-	border-radius: 0.25rem 0.25rem 0% 0%; /* Rem Values Taken from BS4 .rounded Class applied to .carousel div on html*/
+
+
+/** Setting Scrolling Content Inline and Hidden the overflows **/
+.carousel-content,
+.carousel-image {
+	display: inline-flex;
+	overflow: hidden;
+}
+.carousel-content-copy {
+  min-width: 100%;
+  padding: 80px 40px;
 }
 
-/** MOBILE COLOR / TYPOGRAPHY STYLING **/
+.carousel-content-copy:not(:first-child) {
+	display: none;
+}
+
+/** MOBILE COLORS / TYPOGRAPHY / PADDING / MARGINS STYLING **/
+
 .carousel {
 	background-color: rgb(255, 255, 255);
 	box-shadow: 0 50px 100px -20px rgba(50, 50, 93, 0.25),
@@ -166,9 +176,38 @@ CAROUSEL GALLERY
 		inset 0 -2px 6px 0 rgba(10, 37, 64, 0.35);
 }
 
-.carousel-content {
-	padding: 80px 40px;
+.carousel-arrs [class*='arr-'] svg {
+	background-color: #fff;
+	border-radius: 50%;
+	color: #00aeef;
+	box-shadow: none;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.105);
+	transition: cubic-bezier(0.23, 1, 0.32, 1);
+	/* Remove */
+	pointer-events: none;
 }
+
+.carousel-arrs [class*='arr-'] svg:hover {
+	color: #f4af38;
+	transform: translateY(-1px);
+}
+
+.carousel-image img {
+	width: 100vw;
+	min-width: 100%;
+	height: 310px;
+	object-fit: cover;
+  border-radius: 0.25rem 0.25rem 0% 0%; /* Rem Values Taken from BS4 .rounded Class applied to .carousel div on html*/
+	transition: visibility 0s, opacity .3s ease-in;
+}
+
+.hide {
+	position: absolute;
+  opacity: 0;
+  visibility: hidden;
+}
+
+
 
 /** STYLE OVERRIDES FOR 768PX AND ABOVE  **/
 @media (min-width: 768px) {
@@ -181,10 +220,10 @@ CAROUSEL GALLERY
 		z-index: 999999;
 	}
 
-	.carousel-arrs .arr-left {
+	.carousel-arrs .arr-prev {
 		left: -1%;
 	}
-	.carousel-arrs .arr-right {
+	.carousel-arrs .arr-next {
 		right: -1%;
 	}
 
@@ -198,12 +237,17 @@ CAROUSEL GALLERY
 		border-radius: 0.25rem 0% 0% 0.25rem; /* Rem Values Taken from BS4 .rounded Class applied to .carousel div on html*/
 		-webkit-clip-path: polygon(0 0, 100% 0%, 75% 100%, 0% 100%);
 		clip-path: polygon(0 0, 100% 0%, 75% 100%, 0% 100%);
-	}
+  }
+
 
 	.carousel .carousel-image,
 	.carousel .carousel-content {
 		flex-basis: 50%;
-	}
+  }
+
+  .carousel-content-copy {
+    padding: 80px 40px 80px 0px;
+  }
 }
 
 /********************************************************
@@ -260,3 +304,8 @@ WEBINAR SECTION MOBILE FIRST
 		grid-template-columns: 50% 50%;
 	}
 }
+
+
+
+
+
