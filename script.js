@@ -33,9 +33,9 @@ requestAnimationFrame(galleryScroll);
 window.addEventListener('wheel', galleryScroll);
 
 // CAROUSEL GALLERY
-
 const carouselBtns = document.querySelectorAll(`[class*='arr-']`);
-const carouselImages = Array.from(document.querySelectorAll('.carousel-image img'));
+const carouselImages = Array.from(document.querySelectorAll('.carousel-images img'));
+const carouselContent = Array.from(document.querySelectorAll('.carousel-content .carousel-content-item'));
 let currentSlide = 0;
 
 function activateSlider(e) {
@@ -46,32 +46,13 @@ function activateSlider(e) {
     }
 }
 
-function foundImage() {
-    const imageMatch = carouselImages.find(function findMatchingImage(img, index) {
-        if (index == currentSlide) {
-            return img;
-        }
-    });
-    return imageMatch;
-}
-
-function addRemoveHideClass() {
-    carouselImages.filter(function (img) {
-        if (img == foundImage()) {
-            img.classList.remove('hide');
-        } else {
-            img.classList.add('hide');
-        }
-    });
-}
-
 function arrNextBtn() {
     if (currentSlide == carouselImages.length - 1) {
         currentSlide = 0;
     } else {
         currentSlide++;
     }
-    addRemoveHideClass();
+    findHideAndShowContent();
 }
 
 function arrPrevBtn() {
@@ -80,8 +61,22 @@ function arrPrevBtn() {
     } else {
         currentSlide--;
     }
-    addRemoveHideClass();
+    findHideAndShowContent();
 }
+
+function findHideAndShowContent() {
+    const combinedArrays = [carouselImages, carouselContent];
+    combinedArrays.forEach(function listEachArray(content) {
+        content.forEach(function addRemoveClassByIndex(item, index) {
+            if (index == currentSlide) {
+                item.classList.remove('hide');
+            } else {
+                item.classList.add('hide');
+            }
+        });
+    });
+}
+
 carouselBtns.forEach(function (btn) {
     btn.addEventListener('click', activateSlider);
 });
