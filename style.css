@@ -10,6 +10,24 @@ html {
 	box-sizing: inherit;
 }
 
+/* GLOBAL STYLINGS */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 120px; /* Margin bottom by footer height */
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px; /* Set the fixed height of the footer here */
+  line-height: 60px; /* Vertically center the text there */
+  background-color: #f5f5f5;
+}
+
+
 /********************************************************
 *********************************************************
 HERO STYLING
@@ -120,136 +138,6 @@ GRID ROW GALLERY SCROLL
 		width: 120%;
 	}
 }
-
-/********************************************************
-*********************************************************
-CAROUSEL GALLERY
-*********************************************************
-*********************************************************/
-
-/** FLEX / POSITIONING ON MOBILE **/
-.carousel {
-	display: flex;
-	flex-flow: column wrap;
-	align-items: center;
-}
-
-.carousel-arrs [class*='arr-'] {
-	position: absolute;
-	top: 40%;
-	background: none;
-  border: none;
-  z-index:9999;
-}
-
-.carousel-arrs .arr-prev {
-	left: -2%;
-}
-
-.carousel-arrs .arr-next {
-	right: -2%;
-}
-
-
-
-/** Setting Scrolling Content Inline and Hidden the overflows **/
-.carousel-content,
-.carousel-image {
-	display: inline-flex;
-	overflow: hidden;
-}
-.carousel-content-copy {
-  min-width: 100%;
-  padding: 80px 40px;
-}
-
-.carousel-content-copy:not(:first-child) {
-	display: none;
-}
-
-/** MOBILE COLORS / TYPOGRAPHY / PADDING / MARGINS STYLING **/
-
-.carousel {
-	background-color: rgb(255, 255, 255);
-	box-shadow: 0 50px 100px -20px rgba(50, 50, 93, 0.25),
-		0 30px 60px -30px rgba(0, 0, 0, 0.3),
-		inset 0 -2px 6px 0 rgba(10, 37, 64, 0.35);
-}
-
-.carousel-arrs [class*='arr-'] svg {
-	background-color: #fff;
-	border-radius: 50%;
-	color: #00aeef;
-	box-shadow: none;
-	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.105);
-	transition: cubic-bezier(0.23, 1, 0.32, 1);
-	/* Remove */
-	pointer-events: none;
-}
-
-.carousel-arrs [class*='arr-'] svg:hover {
-	color: #f4af38;
-	transform: translateY(-1px);
-}
-
-.carousel-image img {
-	width: 100vw;
-	min-width: 100%;
-	height: 310px;
-	object-fit: cover;
-  border-radius: 0.25rem 0.25rem 0% 0%; /* Rem Values Taken from BS4 .rounded Class applied to .carousel div on html*/
-	transition: visibility 0s, opacity .3s ease-in;
-}
-
-.hide {
-	position: absolute;
-  opacity: 0;
-  visibility: hidden;
-}
-
-
-
-/** STYLE OVERRIDES FOR 768PX AND ABOVE  **/
-@media (min-width: 768px) {
-	.carousel {
-		flex-flow: row nowrap;
-	}
-
-	.carousel-arrs [class*='arr-'] {
-		top: 50%;
-		z-index: 999999;
-	}
-
-	.carousel-arrs .arr-prev {
-		left: -1%;
-	}
-	.carousel-arrs .arr-next {
-		right: -1%;
-	}
-
-	.carousel-image {
-		background-color: #00afef44;
-		-webkit-clip-path: polygon(0 0, 100% 0%, 78% 100%, 0% 100%);
-		clip-path: polygon(0 0, 100% 0%, 78% 100%, 0% 100%);
-	}
-	.carousel-image img {
-		min-height: 500px;
-		border-radius: 0.25rem 0% 0% 0.25rem; /* Rem Values Taken from BS4 .rounded Class applied to .carousel div on html*/
-		-webkit-clip-path: polygon(0 0, 100% 0%, 75% 100%, 0% 100%);
-		clip-path: polygon(0 0, 100% 0%, 75% 100%, 0% 100%);
-  }
-
-
-	.carousel .carousel-image,
-	.carousel .carousel-content {
-		flex-basis: 50%;
-  }
-
-  .carousel-content-copy {
-    padding: 80px 40px 80px 0px;
-  }
-}
-
 /********************************************************
 *********************************************************
 WEBINAR SECTION MOBILE FIRST
@@ -307,5 +195,146 @@ WEBINAR SECTION MOBILE FIRST
 
 
 
+/********************************************************
+*********************************************************
+CAROUSEL GALLERY
+*********************************************************
+*********************************************************/
 
+/** FLEX / POSITIONING ON MOBILE **/
+.carousel {
+	display: flex;
+	flex-flow: column wrap;
+	align-items: flex-start;
+}
+
+/* Previous and Next Arrow Positioning */
+.carousel-arrs [class*='arr-'] {
+	position: absolute;
+	top: 37%;
+	background: none;
+	border: none;
+	z-index: 9999;
+}
+
+.carousel-arrs .arr-prev {
+	left: -2%;
+}
+
+.carousel-arrs .arr-next {
+	right: -2%;
+}
+
+/** SETTING SCROLLING CONTENT INLINE, HIDDING OVERFLOWS AND SETTING HEIGHTS AND WIDTHS FOR MAIN CONTENT SECTIONS **/
+.carousel-content,
+.carousel-images {
+	display: inline-flex;
+  overflow: hidden;
+  width:100%;
+}
+
+.carousel-content {
+	height: 450px;
+	min-height: 100%;
+}
+
+.carousel-images img {
+	width: 100vw;
+	min-width: 100%;
+	height: 310px;
+	object-fit: cover;
+	border-radius: 0.25rem 0.25rem 0% 0%; /* Rem Values Taken from BS4 .rounded class*/
+}
+
+.carousel-content-item {
+  min-width: 100%;
+  padding: 50px 40px;
+}
+
+/** MOBILE / TYPOGRAPHY / PADDING / MARGINS STYLING **/
+
+.carousel {
+  border-radius: .25rem!important;
+	background-color: rgb(255, 255, 255);
+	box-shadow: 0 50px 100px -20px rgba(50, 50, 93, 0.25),
+		0 30px 60px -30px rgba(0, 0, 0, 0.3),
+		inset 0 -2px 6px 0 rgba(10, 37, 64, 0.35);
+}
+
+.carousel-arrs [class*='arr-'] svg {
+	background-color: #fff;
+	border-radius: 50%;
+	color: #00aeef;
+	box-shadow: none;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.105);
+	pointer-events: all;
+	transition: all .2s ease-in-out;
+}
+
+.carousel-arrs [class*='arr-'] svg:hover {
+	color: #f4af38;
+	transform: translateY(-2px);
+
+}
+
+/* Transitions and Hide Class Styling */
+.carousel-images img, .carousel-content .carousel-content-item {
+	transition: visibility 0s, opacity 0.3s ease-in;
+}
+
+.hide {
+	position: absolute;
+	opacity: 0;
+	visibility: hidden;
+}
+
+/** STYLE OVERRIDES FOR 768PX AND ABOVE  **/
+@media (min-width: 768px) {
+
+  /** FLEX / POSITIONING **/
+	.carousel {
+		flex-flow: row nowrap;
+    align-items: stretch;
+    overflow:hidden;
+  }
+
+  /* Previous and Next Arrow Positioning */
+	.carousel-arrs [class*='arr-'] {
+		top: 50%;
+  }
+
+	.carousel-arrs .arr-prev {
+		left: 0%;
+	}
+	.carousel-arrs .arr-next {
+		right: 0%;
+  }
+
+  /* SETTING SCROLLING CONTENT INLINE, HIDDING OVERFLOWS AND SETTING HEIGHTS AND WIDTHS FOR MAIN CONTENT SECTIONS */
+  .carousel-content {
+		height: 550px;
+		align-items: center;
+  }
+
+  .carousel .carousel-images,
+	.carousel .carousel-content {
+		flex-basis: 50%;
+	}
+
+  /** MOBILE / TYPOGRAPHY / PADDING / MARGINS STYLING **/
+	.carousel-images {
+		background-color: #00afef44;
+		-webkit-clip-path: polygon(0 0, 100% 0%, 78% 100%, 0% 100%);
+		clip-path: polygon(0 0, 100% 0%, 78% 100%, 0% 100%);
+	}
+	.carousel-images img {
+		min-height: 100%;
+		-webkit-clip-path: polygon(0 0, 100% 0%, 75% 100%, 0% 100%);
+		clip-path: polygon(0 0, 100% 0%, 75% 100%, 0% 100%);
+  }
+
+	.carousel-content-item {
+		padding: 80px 70px 80px 0px;
+	}
+}
 
