@@ -14,28 +14,57 @@ function heroScroll() {
 
 window.addEventListener('wheel', heroScroll);
 
-// Scrolling Gallery
-const galleryRows = document.querySelectorAll(`[class*="gallery-row-"]`);
+/**
+ * Scrolling Gallery
+ */
+const getGallery = document.querySelector('section.gallery');
+const galleryRows = Array.from(document.querySelectorAll(`[class*="gallery-row-"]`));
+const getBody = document.querySelector('body');
+
 let scrollRow = 0;
 
-function galleryScroll() {
-    requestAnimationFrame(galleryScroll);
+const galleryScroll = function (e) {
     scrollRow = window.pageYOffset;
-    galleryRows.forEach((row, index) => {
-        if (index % 2 === 0) {
-            row.style.transform = `matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, ${scrollRow / 13}, 0, 0, 1)`;
-        } else {
-            row.style.transform = `matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -${scrollRow / 8}, 0, 0, 1)`;
-        }
-    });
+    const slideInAt = window.scrollY + window.innerHeight - getGallery.offsetHeight / 2;
+    const galleryBottom = getGallery.offsetTop + getGallery.offsetHeight;
+    const isHalfShown = slideInAt > getGallery.offsetTop;
+    const isNotScrolledPast = window.scrollY < galleryBottom;
+
+    if (isHalfShown && isNotScrolledPast) {
+        galleryRows.forEach((row, index) => {
+            if (index % 2 === 0) {
+                row.style.transform = `matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -${scrollRow / 10}, 0, 0, 1)`;
+            } else {
+                row.style.transform = `matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, ${scrollRow / 10}, 0, 0, 1)`;
+            }
+        });
+    }
+};
+
+function debounce(func, wait = 10, immediate = true) {
+    let timeout;
+    return function () {
+        const context = this;
+        const args = arguments;
+        const later = function () {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        const callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
 }
-requestAnimationFrame(galleryScroll);
-window.addEventListener('wheel', galleryScroll);
+
+window.addEventListener('wheel', debounce(galleryScroll));
 
 // CAROUSEL GALLERY
 const carouselBtns = document.querySelectorAll(`[class*='arr-']`);
 const carouselImages = Array.from(document.querySelectorAll('.carousel-images img'));
 const carouselContent = Array.from(document.querySelectorAll('.carousel-content .carousel-content-item'));
+const combinedArrays = [carouselImages, carouselContent];
+
 let currentSlide = 0;
 
 function activateSlider(e) {
@@ -52,6 +81,7 @@ function arrNextBtn() {
     } else {
         currentSlide++;
     }
+
     findHideAndShowContent();
 }
 
@@ -65,7 +95,6 @@ function arrPrevBtn() {
 }
 
 function findHideAndShowContent() {
-    const combinedArrays = [carouselImages, carouselContent];
     combinedArrays.forEach(function listEachArray(content) {
         content.forEach(function addRemoveClassByIndex(item, index) {
             if (index == currentSlide) {

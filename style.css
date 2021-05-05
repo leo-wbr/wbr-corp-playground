@@ -94,6 +94,12 @@ GRID ROW GALLERY SCROLL
 	width: 130%;
 }
 
+[class*='gallery-row']:nth-child(even) {
+	position:relative;
+	left:-150px;
+}
+
+
 [class*='gallery-row'] {
 	grid-template-columns: repeat(6, 1fr);
 }
@@ -130,11 +136,10 @@ GRID ROW GALLERY SCROLL
 
 @media (min-width: 900px) {
 	.gallery {
-		height: 80vh;
+		height: 70vh;
 	}
 	.gallery-wrap,
 	[class*='gallery-row'] {
-		gap: 1.05rem;
 		width: 120%;
 	}
 }
