@@ -57,7 +57,8 @@ function debounce(func, wait = 10, immediate = true) {
     };
 }
 
-window.addEventListener('wheel', debounce(galleryScroll));
+// window.addEventListener('wheel', debounce(galleryScroll));
+window.addEventListener('scroll', debounce(galleryScroll));
 
 // CAROUSEL GALLERY
 const carouselBtns = document.querySelectorAll(`[class*='arr-']`);
